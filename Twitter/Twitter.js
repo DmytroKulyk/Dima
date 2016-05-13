@@ -87,15 +87,15 @@ $(document).ready(function() {
     /* function to display random tweet post from mix arrays of users and words*/
     var getRandomFromArray = function(arr) {
         var randomIndex = Math.floor(Math.random() * arr.length);
-        return arr[?];
+        return arr[randomIndex];
     };
     /* function to display random users*/
     var getRandomUsers = function() {
-        return getRandomFromArray(?);
+        return getRandomFromArray(users);
     };
     /* function to display random tweet*/
     var randomMessage = function() {
-        return [getRandomFromArray(?), getRandomFromArray(?), getRandomFromArray(?), getRandomFromArray(?)].join(?);
+        return [getRandomFromArray(wordOne), getRandomFromArray(wordTwo), getRandomFromArray(wordThree), getRandomFromArray(wordFour)].join(' ');
     };
 
     /* function to display new random tweets*/
@@ -114,8 +114,8 @@ $(document).ready(function() {
     }
     /* function to set random time to display new random tweets*/
     // setInterval(newTweet, (Math.random() * 3000) + 5000);
-    setInterval(function() {
-        newTweet(?);
+    setInterval(function(randomMessage, getRandomUsers) {
+        newTweet( );
     }, 3000);
 
     /* function to display new userName , new userImg and alert Hello message */
