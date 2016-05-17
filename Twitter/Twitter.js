@@ -109,14 +109,14 @@ $(document).ready(function() {
             rendomUser.name + '</span></a>' + ': ' +
             '<p class="tweetColor">' + msg + '</p><p class="date">' +
             new Date() + ' </p></li>';
-        posts.prepend(?);
+        posts.prepend(tweet);
         // on every new tweet we need to trigget a filter check to filter the new post
     }
     /* function to set random time to display new random tweets*/
     // setInterval(newTweet, (Math.random() * 3000) + 5000);
-    setInterval(function(randomMessage, getRandomUsers) {
-        newTweet( );
-    }, 3000);
+    setInterval(function() {
+        newTweet(randomMessage(), getRandomUsers());
+    }, 5000);
 
     /* function to display new userName , new userImg and alert Hello message */
     function clearAndShow() {
@@ -125,83 +125,83 @@ $(document).ready(function() {
             name: '' + nameInput.value.toUpperCase(),
             img: 'img/anonymous.png'
         };
-        nameDisplay = $(?).html(thisUser.name);
-        imgDisplay = $(?).html('<a href="https://github.com/samaha999" target="_blank"><img alt="" class="img" src="' + thisUser.img + '"></a>');
+        nameDisplay = $('#newName').html(thisUser.name);
+        imgDisplay = $('#newImg').html('<a href="https://github.com/samaha999" target="_blank"><img alt="" class="img" src="' + thisUser.img + '"></a>');
         nameInput.value = '';
         alert('HELLO ' + thisUser.name.toUpperCase() + '!' + ' FEEL FREE TO TWEET!');
     }
     /* function to display current userName , current userImg and alert enterName if input is empty */
     function newUserName() {
         
-        if (userName === ?) {
+        if (nameInput.value.length == 0) {
             alert('PLEASE ENTER NAME!');
         } else {
             clearAndShow();
         }
     }
     /* function on submitButton click will invoke function newUserName() */
-    $(?).on('click', function() {
+    $("#submitButton").on('click', function() {
         newUserName();
     });
     /* function on Enter click will invoke function newUserName() */
     $('#name').keypress(function(event) {
         if (event.which == 13) {
-            return ?;
+            return newUserName();
         }
     });
     /* function to display main user img ,new post and current date*/
     function newPost() {
-        newTweet(?);
-        // posts.prepend(userImg + '<p class="tweetColor">' + '<a href="#">' + '@' + userName.toLowerCase() + '</a>' + ': ' + postInput + '</p>' + '<p class="date">' + new Date() + '</p>');
+        newTweet(postInput, thisUser);
+       // posts.prepend(userImg + '<p class="tweetColor">' + '<a href="#">' + '@' + userName.toLowerCase() + '</a>' + ': ' + postInput + '</p>' + '<p class="date">' + new Date() + '</p>');
         postGrap.value = '';
     }
     /* function to alert enterMessage if input is empty or if statment to invoke function newPost() */
     function posting() {
-        postInput = postGrap.value;
-        if (?) {
+         postInput = postGrap.value;
+        if (postInput.length == " ") {
             alert('PLEASE ENTER MESSAGE!');
         } else {
             newPost();
         }
     }
     /* function on postButton click will invoke function posting() */
-    $(?).on('click', function() {
+    $("#postButton").on('click', function() {
         posting();
     });
     /* function on Enter click will invoke function posting() */
     $('#newMessage').keypress(function(event) {
-        if (event.which == ?) {
+        if (event.which == 13) {
             posting();
         }
     });
 
     /* function to clear all posts */
     function clearAllPosts() {
-        posts.html(?);
+        posts.html('');
     }
     /* function on clearButton click will invoke function clearAllPosts() */
-    $('#clearButton').on(?, function() {
+    $('#clearButton').on('click', function() {
         clearAllPosts();
     });
 
     // Filter Functions
 
 
-    var isUser = function(value, obj) {
-        // console.log('isUser', arguments);
-        var usernameText = $(obj).find(?).html().toLowerCase();
+    var isUser = function() {
+        //console.log('isUser', arguments);
+        var usernameText = $('#posts li').find("#filterUser".val()).html().toLowerCase();
         var enteredValue = $('#filterUser').val().toLowerCase();
         return (usernameText.indexOf(enteredValue) > -1);
     };
 
-    var isInPost = function(value, obj) {
-        // console.log('isUser', arguments);
-        var userPostText = $(obj).find(?).html().toLowerCase();
+    var isInPost = function() {
+        //console.log('isUser', arguments);
+        var userPostText = $('#posts li').find("#filterUser".val()).html().toLowerCase();
         var enteredValue = $('#filterPost').val().toLowerCase();
         return (userPostText.indexOf(enteredValue) > -1);
     };
     //Functino to filter tweets by user.
-    $(?).keyup(function(event) {
+    $("#filterUser").keyup(function(event) {
         var list = $('#posts li').hide();
         var val = $(this).val();
         var filteredList = list.filter(isUser);
@@ -212,6 +212,6 @@ $(document).ready(function() {
         var list = $('#posts li').hide();
         var val = $(this).val();
         var filteredList = list.filter(isInPost);
-        $(?).show();
+        $(filteredList).show();
     });
 });
