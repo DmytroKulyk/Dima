@@ -187,16 +187,17 @@ $(document).ready(function() {
     // Filter Functions
 
 
-    var isUser = function() {
+
+   var isUser = function(value, obj) {
         //console.log('isUser', arguments);
-        var usernameText = $('#posts li').find("#filterUser".val()).html().toLowerCase();
-        var enteredValue = $('#filterUser').val().toLowerCase();
+        var usernameText = $(obj).find(".username").html().toLowerCase();
+        var enteredValue = $("#filterUser").val().toLowerCase();
         return (usernameText.indexOf(enteredValue) > -1);
     };
 
-    var isInPost = function() {
+    var isInPost = function(value, obj) {
         //console.log('isUser', arguments);
-        var userPostText = $('#posts li').find("#filterUser".val()).html().toLowerCase();
+        var userPostText = $(obj).find(".tweetColor").html().toLowerCase();
         var enteredValue = $('#filterPost').val().toLowerCase();
         return (userPostText.indexOf(enteredValue) > -1);
     };
