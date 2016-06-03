@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-    var userName = 'Ahmad Samaha';
-    var userImg = 'img/ahmad.jpg';
-    var userImgLink = '<a href="https://github.com/samaha999" target="_blank"><img alt="" class="img" src="' + userImg + '"><a/>';
+    var userName = 'Dmytro Kulyk';
+    var userImg = 'img/SEposter.jpg';
+    var userImgLink = '<a href="https://github.com/DmytroKulyk" target="_blank"><img alt="" class="img" src="' + userImg + '"><a/>';
     var nameInput = document.getElementById('name');
     var postGrap = document.getElementById('newMessage');
     var nameDisplay = $('#newName').html(userName);
